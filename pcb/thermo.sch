@@ -134,7 +134,7 @@ Wire Wire Line
 	7150 3550 7050 3550
 Text Label 7050 3550 0    50   ~ 0
 CLK
-Text Label 6950 2350 0    50   ~ 0
+Text Label 6800 2350 0    50   ~ 0
 GND
 Entry Wire Line
 	7650 1950 7750 2050
@@ -155,47 +155,19 @@ Wire Wire Line
 Wire Wire Line
 	8150 2450 7750 2450
 Wire Wire Line
-	8150 2650 7750 2650
-Wire Wire Line
 	6800 2250 7150 2250
 Text Label 7750 1950 0    50   ~ 0
 GND
-Entry Wire Line
-	4100 3250 4200 3350
-Wire Wire Line
-	4200 3350 4600 3350
-Text Label 4200 3350 0    50   ~ 0
+Text Label 6950 4350 0    50   ~ 0
 CS_1
-Entry Wire Line
-	4100 3150 4200 3250
-Entry Wire Line
-	4100 3050 4200 3150
-Entry Wire Line
-	4100 2950 4200 3050
-Entry Wire Line
-	4100 2850 4200 2950
-Entry Wire Line
-	4100 2750 4200 2850
-Wire Wire Line
-	4200 2850 4600 2850
-Wire Wire Line
-	4600 2950 4200 2950
-Wire Wire Line
-	4200 3050 4600 3050
-Wire Wire Line
-	4600 3150 4200 3150
-Wire Wire Line
-	4200 3250 4600 3250
-Text Label 4200 3250 0    50   ~ 0
+Text Label 6900 4250 0    50   ~ 0
 TFT_DC
-Text Label 4200 2850 0    50   ~ 0
+Text Label 6950 3750 0    50   ~ 0
 CS_2
-Text Label 4200 2950 0    50   ~ 0
+Text Label 6950 3050 0    50   ~ 0
 CS_3
-Text Label 4200 3050 0    50   ~ 0
+Text Label 6950 4450 0    50   ~ 0
 CS_4
-Text Label 4200 3150 0    50   ~ 0
-CS_5
 Entry Wire Line
 	7150 4150 7250 4250
 Entry Wire Line
@@ -204,15 +176,15 @@ Wire Wire Line
 	6800 4150 7150 4150
 Wire Wire Line
 	7150 4250 6800 4250
-Text Label 6950 4150 0    50   ~ 0
+Text Label 4200 4250 0    50   ~ 0
 CS_7
-Text Label 6950 4250 0    50   ~ 0
+Text Label 4200 3750 0    50   ~ 0
 CS_6
 Entry Wire Line
 	7150 4350 7250 4450
 Wire Wire Line
 	7150 4350 6800 4350
-Text Label 6900 4350 0    50   ~ 0
+Text Label 6900 3850 0    50   ~ 0
 TFT_CS
 Connection ~ 7250 1650
 Wire Bus Line
@@ -295,17 +267,6 @@ F 3 "https://www.digikey.com/en/products/detail/cui-devices/PJ-002A/96962" H 550
 	1    5450 1150
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector:DB15_Female J1
-U 1 1 6113C1DB
-P 950 4250
-F 0 "J1" H 800 3350 50  0000 L CNN
-F 1 "DB15_Female" H 800 5150 50  0000 L CNN
-F 2 "Thermometry:D15_Female_Horizontal" H 950 4250 50  0001 C CNN
-F 3 " ~" H 950 4250 50  0001 C CNN
-	1    950  4250
-	-1   0    0    1   
-$EndComp
 Wire Wire Line
 	1350 2000 1350 3550
 Wire Wire Line
@@ -370,7 +331,7 @@ Wire Wire Line
 	5650 5800 5650 6550
 Connection ~ 3200 6050
 Wire Wire Line
-	6800 2350 7100 2350
+	6800 2350 6950 2350
 Wire Wire Line
 	7150 1050 6900 1050
 Wire Wire Line
@@ -392,34 +353,28 @@ F 3 "" H 7550 1550 50  0001 C CNN
 	1    7550 1550
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6800 2450 6950 2450
 $Comp
 L power:+3.3V #PWR0102
 U 1 1 611C1A8C
-P 7100 2900
-F 0 "#PWR0102" H 7100 2750 50  0001 C CNN
-F 1 "+3.3V" H 7115 3073 50  0000 C CNN
-F 2 "" H 7100 2900 50  0001 C CNN
-F 3 "" H 7100 2900 50  0001 C CNN
-	1    7100 2900
+P 7100 2500
+F 0 "#PWR0102" H 7100 2350 50  0001 C CNN
+F 1 "+3.3V" H 7115 2673 50  0000 C CNN
+F 2 "" H 7100 2500 50  0001 C CNN
+F 3 "" H 7100 2500 50  0001 C CNN
+	1    7100 2500
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0103
 U 1 1 611DBC4A
-P 7100 2350
-F 0 "#PWR0103" H 7100 2100 50  0001 C CNN
-F 1 "GND" H 7105 2177 50  0000 C CNN
-F 2 "" H 7100 2350 50  0001 C CNN
-F 3 "" H 7100 2350 50  0001 C CNN
-	1    7100 2350
+P 6950 2350
+F 0 "#PWR0103" H 6950 2100 50  0001 C CNN
+F 1 "GND" H 6955 2177 50  0000 C CNN
+F 2 "" H 6950 2350 50  0001 C CNN
+F 3 "" H 6950 2350 50  0001 C CNN
+	1    6950 2350
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6950 2900 7100 2900
-Wire Wire Line
-	6950 2450 6950 2900
 $Comp
 L power:GND #PWR0104
 U 1 1 611ECB88
@@ -509,19 +464,17 @@ Wire Wire Line
 $Comp
 L power:GND #PWR0105
 U 1 1 6113FF3C
-P 7100 3750
-F 0 "#PWR0105" H 7100 3500 50  0001 C CNN
-F 1 "GND" H 7105 3577 50  0000 C CNN
-F 2 "" H 7100 3750 50  0001 C CNN
-F 3 "" H 7100 3750 50  0001 C CNN
-	1    7100 3750
+P 7400 3750
+F 0 "#PWR0105" H 7400 3500 50  0001 C CNN
+F 1 "GND" H 7405 3577 50  0000 C CNN
+F 2 "" H 7400 3750 50  0001 C CNN
+F 3 "" H 7400 3750 50  0001 C CNN
+	1    7400 3750
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6800 3650 7100 3650
-Wire Wire Line
-	7100 3650 7100 3750
-Text Label 7000 3650 0    50   ~ 0
+	7400 3650 7400 3750
+Text Label 7400 3650 0    50   ~ 0
 GND
 $Comp
 L Device:C 0.1uF1
@@ -830,8 +783,6 @@ Wire Wire Line
 Wire Wire Line
 	7750 2950 8150 2950
 Wire Wire Line
-	8150 3050 7750 3050
-Wire Wire Line
 	7750 3150 8150 3150
 Text Label 7750 2750 0    50   ~ 0
 CLK
@@ -843,8 +794,6 @@ Text Label 7750 3050 0    50   ~ 0
 SDO
 Text Label 7750 3150 0    50   ~ 0
 T_IRQ
-Text Label 7000 4450 0    50   ~ 0
-T_CS
 Entry Wire Line
 	7150 4450 7250 4550
 Wire Wire Line
@@ -859,7 +808,7 @@ Entry Wire Line
 	7150 4550 7250 4650
 Wire Wire Line
 	7150 4550 6800 4550
-Text Label 6950 4550 0    50   ~ 0
+Text Label 6950 3950 0    50   ~ 0
 T_IRQ
 $Comp
 L Device:Fuse_Small F1
@@ -1065,38 +1014,216 @@ U 1 1 6110AE8C
 P 8350 2450
 F 0 "ILI9341TFT1" H 8500 3150 50  0000 C CNN
 F 1 "Conn_01x14" H 8500 1650 50  0000 C CNN
-F 2 "Thermometry:ILI9341_1x14_connector" H 8350 2450 50  0001 C CNN
+F 2 "Thermometry:ILI9341_2x7_connector" H 8350 2450 50  0001 C CNN
 F 3 "~" H 8350 2450 50  0001 C CNN
 	1    8350 2450
 	1    0    0    -1  
 $EndComp
-Wire Bus Line
-	3200 6050 6300 6050
+$Comp
+L Connector_Generic:Conn_01x14 ILI9341TFT2
+U 1 1 611F021F
+P 9300 2450
+F 0 "ILI9341TFT2" H 9150 3150 50  0000 C CNN
+F 1 "Conn_01x14" H 9150 1650 50  0000 C CNN
+F 2 "Thermometry:ILI9341_2x7_connector" H 9300 2450 50  0001 C CNN
+F 3 "~" H 9300 2450 50  0001 C CNN
+	1    9300 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x14 ILI9341TFT3
+U 1 1 611EC952
+P 10000 2450
+F 0 "ILI9341TFT3" H 10150 3150 50  0000 C CNN
+F 1 "Conn_01x14" H 10150 1650 50  0000 C CNN
+F 2 "Thermometry:ILI9341_1x14_connector" H 10000 2450 50  0001 C CNN
+F 3 "~" H 10000 2450 50  0001 C CNN
+	1    10000 2450
+	1    0    0    -1  
+$EndComp
+Text Label 9450 1850 0    50   ~ 0
+VIN
+Text Label 9450 1950 0    50   ~ 0
+GND
+Text Label 9450 2050 0    50   ~ 0
+TFT_CS
+Text Label 9450 2150 0    50   ~ 0
+VIN
+Text Label 9450 2350 0    50   ~ 0
+SDI
+Text Label 9450 2250 0    50   ~ 0
+TFT_DC
+Text Label 9450 2450 0    50   ~ 0
+CLK
+Text Label 9450 2550 0    50   ~ 0
+VIN
+Text Label 9400 2650 0    50   ~ 0
+SDO
+Text Label 9450 2750 0    50   ~ 0
+CLK
+Text Label 9450 2850 0    50   ~ 0
+T_CS
+Text Label 9450 2950 0    50   ~ 0
+SDI
+Text Label 9400 3050 0    50   ~ 0
+SDO
+Text Label 9450 3150 0    50   ~ 0
+T_IRQ
+Text Label 4200 4050 0    50   ~ 0
+CS_8
+$Comp
+L Device:R_Small_US R11
+U 1 1 612455D8
+P 9650 2650
+F 0 "R11" V 9600 2750 50  0000 C CNN
+F 1 "22" V 9700 2750 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" H 9650 2650 50  0001 C CNN
+F 3 "~" H 9650 2650 50  0001 C CNN
+	1    9650 2650
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Small_US R12
+U 1 1 61264A06
+P 9650 3050
+F 0 "R12" V 9600 3150 50  0000 C CNN
+F 1 "22" V 9700 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" H 9650 3050 50  0001 C CNN
+F 3 "~" H 9650 3050 50  0001 C CNN
+	1    9650 3050
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:DB15_Female_MountingHoles J1
+U 1 1 61279AC2
+P 950 4250
+F 0 "J1" H 800 3400 50  0000 L CNN
+F 1 "DB15_Female" H 800 5100 50  0000 L CNN
+F 2 "Thermometry:D15_Female_Horizontal" H 950 4250 50  0001 C CNN
+F 3 " ~" H 950 4250 50  0001 C CNN
+	1    950  4250
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R_Small_US R13
+U 1 1 6128BCED
+P 950 3250
+F 0 "R13" V 900 3350 50  0000 C CNN
+F 1 "0" V 1000 3350 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder" H 950 3250 50  0001 C CNN
+F 3 "~" H 950 3250 50  0001 C CNN
+	1    950  3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR03
+U 1 1 6128CFEA
+P 1150 3000
+F 0 "#PWR03" H 1150 2750 50  0001 C CNN
+F 1 "GND" H 1155 2827 50  0000 C CNN
+F 2 "" H 1150 3000 50  0001 C CNN
+F 3 "" H 1150 3000 50  0001 C CNN
+	1    1150 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	950  3150 950  3000
+Wire Wire Line
+	950  3000 1150 3000
+Wire Wire Line
+	7750 2650 8150 2650
+Wire Wire Line
+	7750 3050 8150 3050
+Wire Wire Line
+	9100 1850 9800 1850
+Wire Wire Line
+	9100 1950 9800 1950
+Wire Wire Line
+	9100 2050 9800 2050
+Wire Wire Line
+	9100 2150 9800 2150
+Wire Wire Line
+	9100 2250 9800 2250
+Wire Wire Line
+	9100 2350 9800 2350
+Wire Wire Line
+	9100 2450 9800 2450
+Wire Wire Line
+	9100 2550 9800 2550
+Wire Wire Line
+	9100 2750 9800 2750
+Wire Wire Line
+	9100 2850 9800 2850
+Wire Wire Line
+	9100 2950 9800 2950
+Wire Wire Line
+	9100 3150 9800 3150
+Wire Wire Line
+	9750 3050 9800 3050
+Wire Wire Line
+	9750 2650 9800 2650
+Wire Wire Line
+	9100 2650 9550 2650
+Wire Wire Line
+	9100 3050 9550 3050
+Wire Wire Line
+	6800 2450 6850 2450
+Wire Wire Line
+	6850 2450 6850 2600
+Wire Wire Line
+	6850 2600 7100 2600
+Wire Wire Line
+	7100 2600 7100 2500
+Entry Wire Line
+	7150 3050 7250 3150
+Wire Wire Line
+	7150 3050 6800 3050
+Entry Wire Line
+	7150 3750 7250 3850
+Wire Wire Line
+	6800 3750 7150 3750
+Entry Wire Line
+	4100 3650 4200 3750
+Entry Wire Line
+	4100 4150 4200 4250
+Wire Wire Line
+	4200 3750 4600 3750
+Wire Wire Line
+	4200 4250 4600 4250
+Entry Wire Line
+	7150 3850 7250 3950
+Wire Wire Line
+	6800 3850 7150 3850
+Text Label 6950 4150 0    50   ~ 0
+T_CS
+Text Label 6950 4550 0    50   ~ 0
+CS_5
+Entry Wire Line
+	4100 3950 4200 4050
+Wire Wire Line
+	4200 4050 4600 4050
+Entry Wire Line
+	7150 3950 7250 4050
+Wire Wire Line
+	6800 3950 7150 3950
 Wire Wire Line
 	7550 2550 8150 2550
 Wire Wire Line
 	7550 2150 8150 2150
-Wire Bus Line
-	7650 1650 7650 3050
 Wire Wire Line
 	7400 1950 8150 1950
-Wire Bus Line
-	7250 1650 7250 4650
-Wire Bus Line
-	4100 1650 4100 3450
+Wire Wire Line
+	6800 3650 7400 3650
 Wire Bus Line
 	3200 6050 3200 6700
 Wire Bus Line
+	4100 1650 4100 4150
+Wire Bus Line
+	7650 1650 7650 3050
+Wire Bus Line
+	7250 1650 7250 4650
+Wire Bus Line
+	3200 6050 6300 6050
+Wire Bus Line
 	3200 1650 3200 6050
-$Comp
-L Connector_Generic:Conn_02x07_Counter_Clockwise J?
-U 1 1 6124D54B
-P 9450 2500
-F 0 "J?" H 9500 3017 50  0000 C CNN
-F 1 "Conn_02x07_Counter_Clockwise" H 9500 2926 50  0000 C CNN
-F 2 "" H 9450 2500 50  0001 C CNN
-F 3 "~" H 9450 2500 50  0001 C CNN
-	1    9450 2500
-	1    0    0    -1  
-$EndComp
 $EndSCHEMATC

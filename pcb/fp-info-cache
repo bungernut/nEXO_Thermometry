@@ -1,4 +1,4 @@
-19245257541838089
+19246890613421719
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -81694,8 +81694,8 @@ Teensy41
 
 
 0
-67
-67
+54
+54
 Thermometry
 thermo_fuse
 
@@ -81703,6 +81703,13 @@ thermo_fuse
 0
 2
 2
+Thermometry
+z_Drill_05x10
+
+
+0
+0
+0
 Transformer_SMD
 Pulse_P0926NL
 SMT Gate Drive Transformer, 1:1:1, 8.0x6.3x5.3mm (https://productfinder.pulseeng.com/products/datasheets/SPM2007_61.pdf)
