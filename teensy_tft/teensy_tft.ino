@@ -9,6 +9,8 @@
 #include <ArduinoRS485.h> // ArduinoModbus depends on the ArduinoRS485 library
 #include <ArduinoModbus.h>
 
+#define RREF      430.0
+#define RNOMINAL  100.0
 Adafruit_MAX31865 rtd01 = Adafruit_MAX31865(35);
 Adafruit_MAX31865 rtd02 = Adafruit_MAX31865(41);
 Adafruit_MAX31865 rtd03 = Adafruit_MAX31865(18);
@@ -25,12 +27,6 @@ Adafruit_MAX31865 rtd05 = Adafruit_MAX31865(33);
 #define T_IRQ 39
 ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC);
 
-// The value of the Rref resistor. Use 430.0 for PT100 and 4300.0 for PT1000
-#define RREF      430.0
-// The 'nominal' 0-degrees-C resistance of the sensor
-// 100.0 for PT100, 1000.0 for PT1000
-#define RNOMINAL  100.0
-
 // Enter a MAC address for your controller below.
 byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 // The IP address will be dependent on your local network:
@@ -44,7 +40,6 @@ uint32_t pollModbusMillis;
 uint32_t updateSensorsMillis;
 uint32_t updateClientMillis;
 uint32_t updateDisplayMillis;
-// unsigned int  heartbeat;
 
 // Global variables to make current sensor temps available to every function
 uint16_t rawRTD01;
@@ -73,7 +68,6 @@ const int tcp02_reg1 = 0x07;
 const int tcp02_reg2 = 0x08;
 const int bme_reg1 = 0x09;
 const int bme_reg2 = 0x010;
-// const int tick_tock = 0x11;
 
 
 void setup() {
@@ -87,11 +81,11 @@ void setup() {
   tft.setTextSize(1);
   tft.println("Waiting for Ethernet Connection");
 
-  rtd01.begin(MAX31865_3WIRE);  // set to 2WIRE or 4WIRE as necessary
-  rtd02.begin(MAX31865_3WIRE);  // set to 2WIRE or 4WIRE as necessary
-  rtd03.begin(MAX31865_3WIRE);  // set to 2WIRE or 4WIRE as necessary
-  rtd04.begin(MAX31865_3WIRE);  // set to 2WIRE or 4WIRE as necessary
-  rtd05.begin(MAX31865_3WIRE);  // set to 2WIRE or 4WIRE as necessary
+  rtd01.begin(MAX31865_3WIRE);
+  rtd02.begin(MAX31865_3WIRE);
+  rtd03.begin(MAX31865_3WIRE);
+  rtd04.begin(MAX31865_3WIRE);
+  rtd05.begin(MAX31865_3WIRE);
   //tcp01.begin();
   //tcp01.setThermocoupleType(MAX31856_TCTYPE_T);
   //tcp02.begin();
@@ -115,7 +109,7 @@ void setup() {
   ethServer.begin();
   modbusTCPServer.begin();
   // configure 12 holding registers at address 0x00
-  modbusTCPServer.configureHoldingRegisters(0x00, 12);
+  modbusTCPServer.configureHoldingRegisters(0x00, 11);
 }
 
 
@@ -168,7 +162,6 @@ void readSensors() {
   rawRTD04 = rtd04.readRTD();
   rawRTD05 = rtd05.readRTD();
   
-  
   rtd01temp = rtd01.temperature(RNOMINAL, RREF);
   rtd02temp = rtd02.temperature(RNOMINAL, RREF);
   rtd03temp = rtd03.temperature(RNOMINAL, RREF);
@@ -191,11 +184,45 @@ void readSensors() {
 
 
 void updateClient() {
-  modbusTCPServer.holdingRegisterWrite(rtd01_reg, rawRTD01);
-  modbusTCPServer.holdingRegisterWrite(rtd02_reg, rawRTD02);
-  modbusTCPServer.holdingRegisterWrite(rtd03_reg, rawRTD03);
-  modbusTCPServer.holdingRegisterWrite(rtd04_reg, rawRTD04);
-  modbusTCPServer.holdingRegisterWrite(rtd05_reg, rawRTD05);
+  if(!rtd01.readFault()){ 
+    modbusTCPServer.holdingRegisterWrite(rtd01_reg, rawRTD01);
+  }
+  else {
+    modbusTCPServer.holdingRegisterWrite(rtd01_reg, 0);
+    rtd01.clearFault();  
+  }
+  
+  if(!rtd02.readFault()){ 
+    modbusTCPServer.holdingRegisterWrite(rtd02_reg, rawRTD02);
+  }
+  else {
+    modbusTCPServer.holdingRegisterWrite(rtd02_reg, 0);
+    rtd02.clearFault();
+  }
+  
+  if(!rtd03.readFault()){ 
+    modbusTCPServer.holdingRegisterWrite(rtd03_reg, rawRTD03);
+  }
+  else {
+    modbusTCPServer.holdingRegisterWrite(rtd03_reg, 0);
+    rtd03.clearFault();
+  }
+  
+  if(!rtd04.readFault()){ 
+    modbusTCPServer.holdingRegisterWrite(rtd04_reg, rawRTD04);
+  }
+  else {
+    modbusTCPServer.holdingRegisterWrite(rtd04_reg, 0);
+    rtd04.clearFault();
+  }
+  
+  if(!rtd05.readFault()){ 
+    modbusTCPServer.holdingRegisterWrite(rtd05_reg, rawRTD05);
+  }
+  else {
+    modbusTCPServer.holdingRegisterWrite(rtd05_reg, 0);
+    rtd05.clearFault();
+  }
 
   //flreg.asFloat = tcp01temp;
   //modbusTCPServer.holdingRegisterWrite(tcp01_reg1, flreg.asInt[1]);
@@ -219,6 +246,7 @@ void updateDisplay() {
   }
   else {
     tft.print("RTD_01:"); tft.print("--"); tft.println(" K");
+    rtd01.clearFault();
   }
   
   tft.setCursor(10, 40);
@@ -227,6 +255,7 @@ void updateDisplay() {
   }
   else {
     tft.print("RTD_02:"); tft.print("--"); tft.println(" K");
+    rtd02.clearFault();
   }  
   
   tft.setCursor(10, 70);
@@ -235,6 +264,7 @@ void updateDisplay() {
   }
   else {
     tft.print("RTD_03:"); tft.print("--"); tft.println(" K");
+    rtd03.clearFault();
   }
   
   tft.setCursor(10, 100);
@@ -243,6 +273,7 @@ void updateDisplay() {
   }
   else {
     tft.print("RTD_04:"); tft.print("--"); tft.println(" K");
+    rtd04.clearFault();
   }
 
   tft.setCursor(10, 130);
@@ -251,6 +282,7 @@ void updateDisplay() {
   }
   else {
     tft.print("RTD_05:"); tft.print("--"); tft.println(" K");
+    rtd05.clearFault();
   }  
 
   tft.setTextColor(ILI9341_YELLOW, ILI9341_BLACK);
