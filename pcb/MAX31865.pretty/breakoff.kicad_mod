@@ -1,0 +1,9 @@
+(module breakoff (layer F.Cu) (tedit 6206E601)
+  (fp_text reference REF** (at 0 1.27) (layer Dwgs.User) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value breakoff (at 0 -1.27) (layer F.Fab)
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (pad "" np_thru_hole oval (at 0 0) (size 2 0.5) (drill oval 2 0.5) (layers *.Cu *.Mask))
+)
