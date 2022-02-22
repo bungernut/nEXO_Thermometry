@@ -8,6 +8,9 @@
 #include <Arduino.h>
 #include <ArduinoRS485.h> // ArduinoModbus depends on the ArduinoRS485 library
 #include <ArduinoModbus.h>
+#include <Watchdog_t4.h>
+
+WDT_T4<WDT1> wdt;
 
 #define RREF      430.0
 #define RNOMINAL  100.0
@@ -20,7 +23,7 @@ Adafruit_MAX31865 rtd05 = Adafruit_MAX31865(33);
 // Adafruit_MAX31856 tcp02 = Adafruit_MAX31856(29);
 // Adafruit_BME280 bme(27); // hardware SPI
 
-#define VERSION "nEXO Thermometry v1.2"
+#define VERSION "nEXO Thermometry v1.3"
 #define TFT_DC 36
 #define TFT_CS 40
 #define T_CS 37
@@ -36,6 +39,7 @@ EthernetServer ethServer(502);
 ModbusTCPServer modbusTCPServer;
 
 uint32_t currentMillis;
+uint32_t wdtfeedMillis;
 uint32_t pollModbusMillis;
 uint32_t updateSensorsMillis;
 uint32_t updateClientMillis;
@@ -71,6 +75,12 @@ const int bme_reg2 = 0x010;
 
 
 void setup() {
+  WDT_timings_t WDTconfig;
+  WDTconfig.timeout = 10; /* in seconds, 0->128 */
+  //WDTconfig.trigger = 2; /* in seconds, 0->128 */
+  //WDTconfig.callback = myCallback;
+  wdt.begin(WDTconfig);
+  
   tft.begin();
   tft.fillScreen(ILI9341_BLACK);
   tft.setTextColor(ILI9341_WHITE);
@@ -114,12 +124,12 @@ void setup() {
 
 
 void loop() {
+  currentMillis = millis();
   EthernetClient client = ethServer.available();
   // listen for incoming clients
   if (client) {
     modbusTCPServer.accept(client);
     while (client.connected()) {
-      currentMillis = millis();
       
       modbusTCPServer.poll();
       /*
@@ -145,12 +155,16 @@ void loop() {
   }
   else {
     // backup for if client disconnects, display still runs
-    currentMillis = millis();
     if (currentMillis - updateDisplayMillis > 2000) {
       readSensors();
       updateDisplay();
       updateDisplayMillis = currentMillis;
     }
+  }
+  if (currentMillis - wdtfeedMillis > 1000){
+    // Feed the dog
+    wdt.feed();
+    wdtfeedMillis = currentMillis;
   }
 }
 
