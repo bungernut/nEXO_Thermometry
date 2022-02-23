@@ -36,6 +36,7 @@ byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 IPAddress ip(192, 168, 1, 81);
 
 EthernetServer ethServer(502);
+EthernetClient client;
 ModbusTCPServer modbusTCPServer;
 
 uint32_t currentMillis;
@@ -75,8 +76,9 @@ const int bme_reg2 = 0x010;
 
 
 void setup() {
+  Serial.begin(9600);
   WDT_timings_t WDTconfig;
-  WDTconfig.timeout = 10; /* in seconds, 0->128 */
+  //WDTconfig.timeout = 10; /* in seconds, 0->128 */
   //WDTconfig.trigger = 2; /* in seconds, 0->128 */
   //WDTconfig.callback = myCallback;
   wdt.begin(WDTconfig);
@@ -125,31 +127,40 @@ void setup() {
 
 void loop() {
   currentMillis = millis();
-  EthernetClient client = ethServer.available();
+  
+  client = ethServer.available();
   // listen for incoming clients
   if (client) {
+    currentMillis = millis();
+    //Serial.println("client=True");
     modbusTCPServer.accept(client);
     while (client.connected()) {
+      //Serial.println("Client=While-True");
+      //modbusTCPServer.poll();
       
-      modbusTCPServer.poll();
-      /*
-      if (currentMillis - pollModbusMillis > 1000) {
+      if (currentMillis - pollModbusMillis > 100) {
         // poll for Modbus TCP requests, while client connected
         modbusTCPServer.poll();
         pollModbusMillis = currentMillis;
       }
-      */
       if (currentMillis - updateSensorsMillis > 500) {
+        Serial.print("Read Sensors...");
         readSensors();
         updateSensorsMillis = currentMillis;
+        Serial.println("Done");
       }
       if (currentMillis - updateClientMillis > 500) {
+        Serial.print("Update Modbus...");
         updateClient();
         updateClientMillis = currentMillis;
+        Serial.println("Done");
       }
       if (currentMillis - updateDisplayMillis > 2000) {
+        Serial.print("Update Display...");
         updateDisplay();
         updateDisplayMillis = currentMillis;
+        Serial.println("Done");
+        wdt.feed();
       }
     }
   }
@@ -159,12 +170,8 @@ void loop() {
       readSensors();
       updateDisplay();
       updateDisplayMillis = currentMillis;
+      wdt.feed();
     }
-  }
-  if (currentMillis - wdtfeedMillis > 1000){
-    // Feed the dog
-    wdt.feed();
-    wdtfeedMillis = currentMillis;
   }
 }
 
