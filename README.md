@@ -25,3 +25,19 @@ PCBnew
 
 PCB Version 1.2  
 https://oshpark.com/shared_projects/bG9Ms06A (untested)
+
+
+Parts:
+| LOC | Part | Digikey PN |
+| -- | -- | -- |
+| J1 |  DB15 | LD15S33E4GV00LF-ND | 
+| J2 | Barrel 2x5.5mm | CP-002A-ND |
+| Ethernet | 100 Base T | 1278-1052-ND |
+| LCD Conn | 2x CONN HEADER 14POS | AE11367-ND|
+| R1-12 | 22 Ohm 0805 | A126437CT-ND |
+| R13 | 0 Ohm 0805 | A106066CT-ND |
+| CP1 | 47 uF 1206 | ?? |
+| F1 | 1A Fuse | F6777CT-ND |
+| C1 | 0.1 uF Ethernet Cap | BC1084CT-ND |
+| MCU1 | 2x 24POS Recpt | SAM1093-24-ND |
+
