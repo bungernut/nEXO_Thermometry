@@ -12,6 +12,7 @@ Since the project is built on a Teensy4.1 it also naturally also reduires Teensy
 Current TODO:
 - Fix NativeEthernet locking issue
 - Prevent LCD burn in (partially done)
+- Issue with assigning IP to multiple devices, should have put a couple dip switches to assign mac or IP
 
 Future feature adds:
 - Utilize ILI9341 touch feature for interactive display
