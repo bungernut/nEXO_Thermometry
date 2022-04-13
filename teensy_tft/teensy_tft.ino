@@ -33,7 +33,7 @@ ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC);
 // Enter a MAC address for your controller below.
 byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 // The IP address will be dependent on your local network:
-IPAddress ip(10, 0, 0, 81);
+IPAddress ip(192,168,1,81);
 
 EthernetServer ethServer(502);
 EthernetClient client;
@@ -131,7 +131,7 @@ void setup() {
   ethServer.begin();
   modbusTCPServer.begin();
   // configure 12 holding registers at address 0x00
-  modbusTCPServer.configureHoldingRegisters(0x00, 11);
+  modbusTCPServer.configureHoldingRegisters(0x00, 20);
 }
 
 
