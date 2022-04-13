@@ -31,9 +31,9 @@ Adafruit_BME280 bme(27); // hardware SPI
 ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC);
 
 // Enter a MAC address for your controller below.
-byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
+byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xEC};
 // The IP address will be dependent on your local network:
-IPAddress ip(192,168,1,81);
+IPAddress ip(192,168,1,82);
 
 EthernetServer ethServer(502);
 EthernetClient client;
@@ -88,7 +88,7 @@ union {
 void setup() {
   Serial.begin(9600);
   WDT_timings_t WDTconfig;
-  //WDTconfig.timeout = 10; /* in seconds, 0->128 */
+  WDTconfig.timeout = 10; /* in seconds, 0->128 */
   //WDTconfig.trigger = 2; /* in seconds, 0->128 */
   //WDTconfig.callback = myCallback;
   wdt.begin(WDTconfig);
@@ -130,8 +130,8 @@ void setup() {
   // Start the server
   ethServer.begin();
   modbusTCPServer.begin();
-  // configure 12 holding registers at address 0x00
-  modbusTCPServer.configureHoldingRegisters(0x00, 20);
+  // configure holding registers at address 0x00
+  modbusTCPServer.configureHoldingRegisters(0x00, 50);
 }
 
 
@@ -141,10 +141,11 @@ void loop() {
   client = ethServer.available();
   // listen for incoming clients
   if (client) {
-    currentMillis = millis();
+    
     //Serial.println("client=True");
     modbusTCPServer.accept(client);
     while (client.connected()) {
+      currentMillis = millis();
       //Serial.println("Client=While-True");
       //modbusTCPServer.poll();
       
