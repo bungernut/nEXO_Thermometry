@@ -33,6 +33,10 @@ Parts:
 | -- | -- | -- |
 | J1 |  DB15 | LD15S33E4GV00LF-ND | 
 | J2 | Barrel 2x5.5mm | CP-002A-ND |
+|Teensy Conn| 24POS RCPT| SAM1093-24-ND|
+|Teensy Conn| 6POS 2mm RCPT| DUPIIN - 2141-2X03G00SB |
+|Teensy header| 30POS 2.54mm | S1012EC-30-ND |
+|Teensy header| 6POS 2mm | WM20513-ND|
 | Ethernet | 100 Base T | 1278-1052-ND |
 | LCD Conn | 2x CONN HEADER 14POS | AE11367-ND|
 | R1-12 | 22 Ohm 0805 | A126437CT-ND |
