@@ -4,8 +4,8 @@ Using Teensy 4.1 and Arduino Mega to collect temperatures using PT100's and ther
 This program requires several libraries to be compiled. 
 All but the WDT is installable via the Arduino library manager. 
 Since the project is built on a Teensy4.1 it also naturally also reduires Teensyduino.
-- [x] Adafruit BME280
-- [x] Adafruit MAX31865
+- [ ] Adafruit BME280
+- [ ] Adafruit MAX31865
 - [ ] Adafruit MAX31856
 - [ ] WDT_T4 (https://github.com/tonton81/WDT_T4)
 
